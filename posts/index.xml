@@ -30,86 +30,21 @@ CREATE TABLE tb_product ( id bigint(20) NOT NULL AUTO_INCREMENT COMMENT &amp;lsq
     </item>
     
     <item>
-      <title>Test 9</title>
-      <link>https://1998kang.github.io/posts/test-9/</link>
-      <pubDate>Thu, 09 Jan 1012 00:00:00 +0000</pubDate>
+      <title></title>
+      <link>https://1998kang.github.io/posts/mysql/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://1998kang.github.io/posts/test-9/</guid>
-      <description>Test 9</description>
-    </item>
-    
-    <item>
-      <title>Test 8</title>
-      <link>https://1998kang.github.io/posts/test-8/</link>
-      <pubDate>Wed, 08 Jan 1012 00:00:00 +0000</pubDate>
-      
-      <guid>https://1998kang.github.io/posts/test-8/</guid>
-      <description>Test 8</description>
-    </item>
-    
-    <item>
-      <title>Test 7</title>
-      <link>https://1998kang.github.io/posts/test-7/</link>
-      <pubDate>Tue, 07 Jan 1012 00:00:00 +0000</pubDate>
-      
-      <guid>https://1998kang.github.io/posts/test-7/</guid>
-      <description>Test 7</description>
-    </item>
-    
-    <item>
-      <title>Test 6</title>
-      <link>https://1998kang.github.io/posts/test-6/</link>
-      <pubDate>Mon, 06 Jan 1012 00:00:00 +0000</pubDate>
-      
-      <guid>https://1998kang.github.io/posts/test-6/</guid>
-      <description>Test 6</description>
-    </item>
-    
-    <item>
-      <title>Test 5</title>
-      <link>https://1998kang.github.io/posts/test-5/</link>
-      <pubDate>Sun, 05 Jan 1012 00:00:00 +0000</pubDate>
-      
-      <guid>https://1998kang.github.io/posts/test-5/</guid>
-      <description>Test 5</description>
-    </item>
-    
-    <item>
-      <title>Test 4</title>
-      <link>https://1998kang.github.io/posts/test-4/</link>
-      <pubDate>Sat, 04 Jan 1012 00:00:00 +0000</pubDate>
-      
-      <guid>https://1998kang.github.io/posts/test-4/</guid>
-      <description>Test 4</description>
-    </item>
-    
-    <item>
-      <title>Test 3</title>
-      <link>https://1998kang.github.io/posts/test-3/</link>
-      <pubDate>Fri, 03 Jan 1012 00:00:00 +0000</pubDate>
-      
-      <guid>https://1998kang.github.io/posts/test-3/</guid>
-      <description>Test 3</description>
-    </item>
-    
-    <item>
-      <title>Test 2</title>
-      <link>https://1998kang.github.io/posts/test-2/</link>
-      <pubDate>Thu, 02 Jan 1012 00:00:00 +0000</pubDate>
-      
-      <guid>https://1998kang.github.io/posts/test-2/</guid>
-      <description>Test 2</description>
-    </item>
-    
-    <item>
-      <title>Test 1</title>
-      <link>https://1998kang.github.io/posts/test-1/</link>
-      <pubDate>Wed, 01 Jan 1012 00:00:00 +0000</pubDate>
-      
-      <guid>https://1998kang.github.io/posts/test-1/</guid>
-      <description>Test 1 I am referencing a footnote1
-  I am the footnote &amp;#x21a9;&amp;#xfe0e;
-   </description>
+      <guid>https://1998kang.github.io/posts/mysql/</guid>
+      <description>mysql的查询 自增主键。一个听起来很吓人的名字，但实际含义很简单。“自增”的意思是，每次在这张数据表中创建一条新记录的时候，数据库都会在上一个id值的基础上自动加上一个固定的步长(默认就是+1)作为新记录的id值。而所谓“主键”，就是能够在一张数据表中唯一标识一条记录的字段，因为每条记录的id都不一样，所以它是主键。这个字段可以是为了单纯的标识数据的唯一性，也可以具有一些业务含义，比如这里的id就同时也是骑手的账号id；
+基本查询
+SELECT 列名(或者*，表示所有列) **FROM** 表名 **WHERE** 筛选条件;
+IN 操作
+SELECT name, real_name_certify_state, level, level_city FROM tb_rider WHERE id IN(2, 4, 7);
+SELECT name, real_name_certify_state, level, level_city FROM tb_rider WHERE name IN(&amp;ldquo;Banner&amp;rdquo;, &amp;ldquo;Thor&amp;rdquo;, &amp;ldquo;Coulson&amp;rdquo;);
+关系运算符：AND 和 OR（不同条件也可以连接）
+SELECT * FROM tb_rider WHERE created_at &amp;gt;= &amp;ldquo;2017-02-01 00:00:00&amp;rdquo; AND created_at &amp;lt; &amp;ldquo;2017-06-01 00:00:00&amp;rdquo; AND level = 3;
+排序：ORDER BY
+SELECT order_id, created_at FROM tb_order WHERE rider_id = 1 AND grabbed_time &amp;gt;= &amp;ldquo;2017-12-30 00:00:00&amp;rdquo; AND grabbed_time &amp;lt; &amp;ldquo;2017-12-31 00:00:00&amp;rdquo; AND order_state = 40 ORDER BY created_at DESC;</description>
     </item>
     
   </channel>

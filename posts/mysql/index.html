@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title> // 阿康的笔记</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.67.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="阿康" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://1998kang.github.io/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="mysql的查询 自增主键。一个听起来很吓人的名字，但实际含义很简单。“自增”的意思是，每次在这张数据表中创建一条新记录的时候，数据库都会在上一个id值的基础上自动加上一个固定的步长(默认就是&#43;1)作为新记录的id值。而所谓“主键”，就是能够在一张数据表中唯一标识一条记录的字段，因为每条记录的id都不一样，所以它是主键。这个字段可以是为了单纯的标识数据的唯一性，也可以具有一些业务含义，比如这里的id就同时也是骑手的账号id；
+基本查询
+SELECT 列名(或者*，表示所有列) **FROM** 表名 **WHERE** 筛选条件;
+IN 操作
+SELECT name, real_name_certify_state, level, level_city FROM tb_rider WHERE id IN(2, 4, 7);
+SELECT name, real_name_certify_state, level, level_city FROM tb_rider WHERE name IN(&ldquo;Banner&rdquo;, &ldquo;Thor&rdquo;, &ldquo;Coulson&rdquo;);
+关系运算符：AND 和 OR（不同条件也可以连接）
+SELECT * FROM tb_rider WHERE created_at &gt;= &ldquo;2017-02-01 00:00:00&rdquo; AND created_at &lt; &ldquo;2017-06-01 00:00:00&rdquo; AND level = 3;
+排序：ORDER BY
+SELECT order_id, created_at FROM tb_order WHERE rider_id = 1 AND grabbed_time &gt;= &ldquo;2017-12-30 00:00:00&rdquo; AND grabbed_time &lt; &ldquo;2017-12-31 00:00:00&rdquo; AND order_state = 40 ORDER BY created_at DESC;"/>
+
+    <meta property="og:title" content="" />
+<meta property="og:description" content="mysql的查询 自增主键。一个听起来很吓人的名字，但实际含义很简单。“自增”的意思是，每次在这张数据表中创建一条新记录的时候，数据库都会在上一个id值的基础上自动加上一个固定的步长(默认就是&#43;1)作为新记录的id值。而所谓“主键”，就是能够在一张数据表中唯一标识一条记录的字段，因为每条记录的id都不一样，所以它是主键。这个字段可以是为了单纯的标识数据的唯一性，也可以具有一些业务含义，比如这里的id就同时也是骑手的账号id；
+基本查询
+SELECT 列名(或者*，表示所有列) **FROM** 表名 **WHERE** 筛选条件;
+IN 操作
+SELECT name, real_name_certify_state, level, level_city FROM tb_rider WHERE id IN(2, 4, 7);
+SELECT name, real_name_certify_state, level, level_city FROM tb_rider WHERE name IN(&ldquo;Banner&rdquo;, &ldquo;Thor&rdquo;, &ldquo;Coulson&rdquo;);
+关系运算符：AND 和 OR（不同条件也可以连接）
+SELECT * FROM tb_rider WHERE created_at &gt;= &ldquo;2017-02-01 00:00:00&rdquo; AND created_at &lt; &ldquo;2017-06-01 00:00:00&rdquo; AND level = 3;
+排序：ORDER BY
+SELECT order_id, created_at FROM tb_order WHERE rider_id = 1 AND grabbed_time &gt;= &ldquo;2017-12-30 00:00:00&rdquo; AND grabbed_time &lt; &ldquo;2017-12-31 00:00:00&rdquo; AND order_state = 40 ORDER BY created_at DESC;" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://1998kang.github.io/posts/mysql/" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://1998kang.github.io/"><img class="app-header-avatar" src="/avatar.jpg" alt="阿康" /></a>
+      <h1>阿康的笔记</h1>
+      <p>阿康在这里祝各位身体健康，万事如意</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/1998kang" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title"></h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 1, 0001
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          4 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      <h3 id="mysql的查询">mysql的查询</h3>
+<p>自增主键。一个听起来很吓人的名字，但实际含义很简单。<strong>“自增”的意思是，每次在这张数据表中创建一条新记录的时候，数据库都会在上一个id值的基础上自动加上一个固定的步长(默认就是+1)作为新记录的id值。而所谓“主键”</strong>，就是能够在一张数据表中唯一标识一条记录的字段，因为每条记录的id都不一样，所以它是主键。这个字段可以是为了单纯的标识数据的唯一性，也可以具有一些业务含义，比如这里的id就同时也是骑手的账号id；</p>
+<p>基本查询</p>
+<p><strong>SELECT</strong> 列名(或者*，表示所有列) **FROM** 表名 **WHERE** 筛选条件;</p>
+<p><strong>IN 操作</strong></p>
+<p><strong>SELECT</strong> <strong>name</strong>, real_name_certify_state, <strong>level</strong>, level_city <strong>FROM</strong> tb_rider <strong>WHERE</strong> <strong>id</strong> <strong>IN</strong>(2, 4, 7);</p>
+<p><strong>SELECT</strong> <strong>name</strong>, real_name_certify_state, <strong>level</strong>, level_city <strong>FROM</strong> tb_rider <strong>WHERE</strong> <strong>name</strong> <strong>IN</strong>(&ldquo;Banner&rdquo;, &ldquo;Thor&rdquo;, &ldquo;Coulson&rdquo;);</p>
+<p><strong>关系运算符：AND 和 OR（不同条件也可以连接）</strong></p>
+<p><strong>SELECT</strong> * <strong>FROM</strong> tb_rider <strong>WHERE</strong> created_at &gt;= &ldquo;2017-02-01 00:00:00&rdquo; <strong>AND</strong> created_at &lt; &ldquo;2017-06-01 00:00:00&rdquo; <strong>AND</strong> <strong>level</strong> = 3;</p>
+<p><strong>排序：ORDER BY</strong></p>
+<p><strong>SELECT</strong> order_id, created_at <strong>FROM</strong> tb_order <strong>WHERE</strong> rider_id = 1 <strong>AND</strong> grabbed_time &gt;= &ldquo;2017-12-30 00:00:00&rdquo; <strong>AND</strong> grabbed_time &lt; &ldquo;2017-12-31 00:00:00&rdquo; <strong>AND</strong> order_state = 40 <strong>ORDER</strong> <strong>BY</strong> created_at <strong>DESC</strong>;</p>
+<p>DESC是**“递减&rdquo;**的意思，与之对应的是ASC递增。ORDER BY created_at DESC的含义是，按照(BY)created_at字段值递减(DESC)的顺序对查询结果排序(ORDER)。</p>
+<p>查询2017-12-30和2017-12-31两天所有运单的所有信息，并先按照骑手id递增，再按运单状态递减的顺序排序展示</p>
+<p><strong>SELECT</strong> * <strong>FROM</strong> tb_order <strong>WHERE</strong> created_at &gt;= &ldquo;2017-12-30 00:00:00&rdquo; <strong>AND</strong> created_at &lt; &ldquo;2018-01-01 00:00:00&rdquo; <strong>ORDER</strong> <strong>BY</strong> rider_id <strong>ASC</strong>, order_state <strong>DESC</strong>;</p>
+<p><strong>聚合函数：COUNT，SUM, AVG</strong></p>
+<p>COUNT：对查询结果集合中特定的列进行计数；（单纯计数）</p>
+<p><strong>SELECT</strong> <strong>COUNT</strong>(<strong>id</strong>) <strong>FROM</strong> tb_order <strong>WHERE</strong> rider_id = 1 <strong>AND</strong> order_state = 40 <strong>AND</strong> created_at &gt;= &ldquo;2017-12-30 00:00:00&rdquo; <strong>AND</strong> created_at &lt; &ldquo;2017-12-31 00:00:00&rdquo;;</p>
+<p><strong>SELECT</strong> <strong>COUNT</strong>(*) <strong>FROM</strong> tb_order <strong>WHERE</strong> rider_id = 1 <strong>AND</strong> order_state = 40 <strong>AND</strong> created_at &gt;= &ldquo;2017-12-30 00:00:00&rdquo; <strong>AND</strong> created_at &lt; &ldquo;2017-12-31 00:00:00&rdquo;;</p>
+<p>COUNT不会自动去重；</p>
+<p>COUNT在某一条查询结果中，用来计数的那一列的值为**“空&rdquo;**时，这条记录不进行计数；</p>
+<p>注意这里的“空”指的是<!-- raw HTML omitted -->，而不是某一列没有展示出任何值就是空。</p>
+<p>SUM：对查询结果的某个字段进行求和；</p>
+<p>查询Stark这名骑手的累计配送里程：</p>
+<p><strong>SELECT</strong> <strong>SUM</strong>(merchant_customer_distance) <strong>FROM</strong> tb_order <strong>WHERE</strong> rider_id = 1 <strong>AND</strong> order_state = 40;</p>
+<p>AVG：就是average的意思，对查询结果的某个字段计算平均值；</p>
+<p>查询Stark这名骑手的平均配送里程</p>
+<p><strong>SELECT</strong> <strong>AVG</strong>(merchant_customer_distance) <strong>FROM</strong> tb_order <strong>WHERE</strong> rider_id = 1 <strong>AND</strong> order_state = 40;</p>
+<p><strong>聚合函数的好搭档：HAVING 语法</strong></p>
+<p>查询2017-12-30当天每个参与跑单骑手的完成单平均配送距离，并筛选出其中平均配送距离超过1.5km的数据：</p>
+<p><strong>SELECT</strong> rider_id, rider_name, <strong>AVG</strong>(merchant_customer_distance) <strong>FROM</strong> tb_order <strong>WHERE</strong> order_state = 40 <strong>AND</strong> created_at &gt;= &ldquo;2017-12-30 00:00:00&rdquo; <strong>AND</strong> created_at &lt; &ldquo;2017-12-31 00:00:00&rdquo; <strong>GROUP</strong> <strong>BY</strong> rider_id <strong>HAVING</strong> <strong>AVG</strong>(merchant_customer_distance) &gt; 1.5;</p>
+<p><strong>对查询结果去重：DISTINCT 语法</strong></p>
+<p><strong>SELECT</strong> <strong>COUNT</strong>(<strong>DISTINCT</strong> <strong>name</strong>) <strong>FROM</strong> tb_sample_1;</p>
+<p><strong>将查询数据分组：GROUP BY 语法</strong></p>
+<p>查询2017-12-30当天每个参与跑单的骑手各自的完成单总量；</p>
+<p><strong>SELECT</strong> rider_id, rider_name, <strong>COUNT</strong>(order_id) <strong>FROM</strong> tb_order <strong>WHERE</strong> order_state = 40 <strong>AND</strong> created_at &gt;= &ldquo;2017-12-30 00:00:00&rdquo; <strong>AND</strong> created_at &lt; &ldquo;2017-12-31 00:00:00&rdquo; <strong>GROUP</strong> <strong>BY</strong> rider_id;</p>
+<p>查询2017-12-30当天每个参与跑单骑手的完成单平均配送距离；</p>
+<p><strong>SELECT</strong> rider_id, rider_name, <strong>AVG</strong>(merchant_customer_distance) <strong>FROM</strong> tb_order <strong>WHERE</strong> order_state = 40 <strong>AND</strong> created_at &gt;= &ldquo;2017-12-30 00:00:00&rdquo; <strong>AND</strong> created_at &lt; &ldquo;2017-12-31 00:00:00&rdquo; <strong>GROUP</strong> <strong>BY</strong> rider_id;</p>
+<p>首先执行的是WHERE条件筛选，然后对筛选出的数据结果根据骑手id进行分组，最后再对每个分组中的数据进行merchant_customer_distance列的求平均值。</p>
+<p><strong>常用的数据类型</strong></p>
+<p><img src="http://note.youdao.com/noteshare?id=7937f78c749461fd6e520b08cc9b5478&amp;sub=0586F41C94124A92B7B935E7FB10D660" alt="img"></p>
+<p><strong>SELECT</strong> score <strong>FROM</strong> tb_stu_math_score <strong>WHERE</strong> <strong>id</strong>=1;</p>
+<ol>
+<li>这条Sql语句会被执行，根据主键id找到对应的行，进而获取到这一行、score这列的值；</li>
+<li>但是我们上面说到，计算机的存储是基于二进制的，所以获取到的score值是类似于00000000000000000000000001100100这样的二进制流；</li>
+<li>这时候根据tb_stu_math_score表的定义，score这一列被定义为整型，于是将二进制流转化为一个整型数，经过进制转换得到00000000000000000000000001100100对应的整型值为100，于是我们看到的结果就是100。</li>
+</ol>
+<p>实际上反过来也非常类似，当我们向这张表中写入数据时，例如写入的score列的值为100。因为存储基于二进制，根据表的定义，score列的类型为整型，于是将值100按照整型转换为对应的二进制流00000000000000000000000001100100，并且写入到库中。</p>
+<p>[2] Sql的主要数据类型有哪些？</p>
+<p>Sql中常常接触的数据类型主要包括几类。</p>
+<p>1 整型</p>
+<ol>
+<li>tinyint：用来表示很小很小的整数，比如常常用它作为is_deleted、is_valid这些字段的字段类型，因为这两个字段表示该条记录是否有效，只存在两个值分别是0和1；</li>
+<li>smallint：比tinyint稍微大一点点的整型，可以表示更大一点的整数，比如200、404、401这样的整数值；</li>
+<li>int：常用的整型，可以用来表示比较大的整数，比如10322(事实上int可以表示的整数范围远远比这个大)；</li>
+<li>bigint：用来表示非常大的整数，比如大多数表的自增id就会使用这个类型，可以表示类似10322903这样非常大的整数(事实上bigint可以表示的整数范围远远比这个要大)；</li>
+</ol>
+<p>2 浮点型</p>
+<ol>
+<li>decimal：可以表示非常准确的小数，比如经纬度；</li>
+</ol>
+<p>3 字符串类型</p>
+<ol>
+<li>char：固定长度的字符串；</li>
+<li>varchar：可变长度的字符串；</li>
+</ol>
+<p>这里固定长度和可变长度指的是数据库中的存储形式，因为这部分的内容其实有些超出了这个教程的范围，我们不过多的解释这里的区别。一般在我们实际的应用中varchar用的更多一些。它们都表示类似于&quot;very glad to meet u, Huohuo!&ldquo;这样的一串字符，当然也可以是中文&quot;敲开心认识你，火火！&quot;。</p>
+<p>4 日期类型</p>
+<ol>
+<li>date：表示一个日期，只包含日期部分，不包含时间，比如当前日期&quot;2018-01-23&rdquo;；</li>
+<li>datetime：表示一个日期，同时包含日期部分和时间部分，比如当前日期&quot;2018-01-23 03:01:43&rdquo;；</li>
+</ol>
+<p>我们在这里只是简单的介绍了几种Sql中常见的字段类型，并没有很深入的去解释它们的原理、差异以及一些其他的数据类型，咱们不着急去学习那些“高大上”的内容，先理解这些类型的含义。</p>
+<p>怎么知道一张表中每一列的类型是什么？</p>
+<p>第1种方式是使用DESC 表名命令，例如我们想看一下之前提到的tb_rider表的每一列字段类型，就可以执行命令DESC tb_rider。</p>
+<p>第二种方式是使用SHOW CREATE TABLE 表名命令，例如SHOW CREATE TABLE tb_rider。</p>
+<p><strong>索引</strong></p>
+<p><strong>索引</strong>绝对算得上是关系型数据库中最关键同时也是最有难度的话题。即便是经验丰富的研发同学，也经常会踩到索引的坑。不过我们这里介绍索引，只是为了更好的服务于查询，我会尽可能避免牵扯进一些复杂的概念和底层原理。</p>
+<p><strong>[1] 什么是索引？</strong></p>
+<p>那么到底什么是索引呢？<strong>你可以把数据库理解为一本很厚的书(假设有10万页)，书中的内容就是数据库里的数据，那么索引就是书的目录</strong>**。** 假设你从来没有阅读过这本书，此刻你想要阅读书的第7章第2小节。如果没有目录，你可能需要翻阅整本书找到你要阅读的内容。但是在有目录的情况下，你就只需要先查一下目录找到对应的页码，然后直接翻到那一页就能看到你想看的内容了。索引也是类似的，首先查询索引找到目标数据的位置，再从特定的位置读取出数据的内容。</p>
+<p>如何设计索引，是设计数据库表的时候考虑的关键点之一。索引一般由表中的某一列或者某几列构成，一旦设置某一列为索引，那么之后每次在往表中写入数据的时候，都会更新这一列到索引中去。事实上，索引在技术层面是比较复杂的，涉及到磁盘I/O、B树、优化器(Optimizer)等很多技术概念，不过我们先不去深究这些。</p>
+<p><strong>[2] 为什么索引很重要，它有什么用？</strong></p>
+<p><strong>索引之所以重要，最主要的原因是能够大大提高查询的速度</strong>。上面我们举了书的例子，当这本书的页数足够大的时候(假设有2000万页)，如果没有目录，想要查阅其中的某一章节的内容，那几乎就是天方夜谭了。数据库也是如此，当表中的数据只有几行或者几十行、几百行的时候，有没有索引其实差别不大，但是当表中的数据非常非常多的时候(比如众包的运单表，2000万+ 行)，如果没有索引，要找到某一条目标数据，查询的速度就会非常非常非常的慢。</p>
+<p><strong>[3]如何使用索引？</strong></p>
+<p>要使用索引非常简单，<strong>只需要在<strong><strong>WHERE</strong></strong>条件中使用到索引列作为查询条件</strong></p>
+<p>假设这张数据表中order_id是索引列，那么当我们以order_id作为查询条件时，我们就利用了索引，比如下面这条Sql。</p>
+<p><strong>SELECT</strong> * <strong>FROM</strong> tb_order <strong>WHERE</strong> order_id = 300000201712310007;</p>
+<p>类似的使用order_id作为查询条件的Sql也都会利用到索引，看看你是否都理解下面两条Sql语句的含义。</p>
+<p>\1. <strong>SELECT</strong> * <strong>FROM</strong> tb_order   <strong>WHERE</strong> order_id <strong>IN</strong> (300000201712310007, 300000201712310006)   <strong>AND</strong> order_state = 40; 2. <strong>SELECT</strong> order_id, order_state <strong>FROM</strong> tb_order   <strong>WHERE</strong> order_id &gt;= 300000201712300001   <strong>AND</strong> order_id &lt;= 300000201712300006   <strong>AND</strong> order_state = 40;</p>
+<p><strong>[4] 索引的类型、如何确定表中的哪些列是索引列？</strong></p>
+<p>还记得字段类型一节中提到的DESC 表名和SHOW CREATE TABLE 表名语法吗？前面我们将这两个语法用在了tb_rider表上，这一节让我们看一看tb_order表。</p>
+<p>首先是DESC tb_order,我们会得到下面的结果。</p>
+<p><img src="http://note.youdao.com/noteshare?id=7937f78c749461fd6e520b08cc9b5478&amp;sub=0586F41C94124A92B7B935E7FB10D660" alt="img"></p>
+<p>之前我们关注的是Type这一项，这里让我们关注Key这一项。我们看到有些列对应的Key是空的，这就表示这一列(或者叫这个字段)不是索引列(或者叫索引字段)。但id、order_id、created_at和updated_at这几列对应的Key均是有值的，这说明这几列都是索引列。但这几列Key的值又各不相同，这是为啥呐？这是以内索引也分为不同的类型，让我们逐个来解释一下。</p>
+<ol>
+<li>PRI：是primary的缩写，标记这一列为<strong>主键</strong>，主键的概念我们在一开始的时候有介绍过，就是用来唯一标识表中每一行数据的索引；</li>
+<li>UNI: 是unique的缩写，顾名思义就是<strong>唯一</strong>的意思, 被设置为UNI KEY的列，不允许出现重复的值，如果尝试向表中插入这一列的值完全相同的两行数据，则会引发报错。我猜你肯定会觉得疑惑，那UNI KEY和PRI KEY有啥区别？首先是这两种类型的索引在实现上是有区别的(这一点咱们不深究，涉及到了数据库底层对索引的实现)，其次PRI KEY更多的是数据库层面的语义，仅仅是描述数据的唯一性，而UNI KEY则更多是业务层面的语义，比如说这里的order_id字段，因为业务上不能存在两个运单号完全相同的运单，所以需要把order_id这一列设置为UNI KEY；</li>
+<li>MUL：是multiple的缩写，表示这一列是被设置为一个普通索引。之所以叫做multiple，是因为此时可能这一列单独作为索引，也可能这一列和其他标记为MUL的列共同构成了一个索引(这种由多列共同构成的索引被叫作<strong>复合索引</strong>)；</li>
+</ol>
+<p>现在我们还处在Sql以及数据库知识(是的，除了Sql，我还偷偷介绍了一些数据库原理)学习的初级阶段，所以让我们知道这写差异，但是不着急去把这些搞得一清二楚，它们都是索引，只要合理使用，都可以帮助我们加快Sql查询的效率。</p>
+<p>另一种识别表中索引列的方法就是通过SHOW CREATE TABLE 表名命令，比如SHOW CREATE TABLE tb_order，我们得到下面的结果。</p>
+<p><strong>CREATE</strong> <strong>TABLE</strong> <code>tb_order</code> (  <code>id</code> bigint(20) <strong>NOT</strong> NULL AUTO_INCREMENT <strong>COMMENT</strong> &lsquo;对外不提供，内部使用&rsquo;,  <code>order_id</code> bigint(20) <strong>NOT</strong> NULL <strong>DEFAULT</strong> &lsquo;0&rsquo; <strong>COMMENT</strong> &lsquo;运单的跟踪号（可以对外提供）',  <code>rider_id</code> int(11) <strong>NOT</strong> NULL <strong>DEFAULT</strong> &lsquo;0&rsquo; <strong>COMMENT</strong> &lsquo;配送员id&rsquo;,  <code>rider_name</code> varchar(100) <strong>NOT</strong> NULL <strong>DEFAULT</strong> '&rsquo; <strong>COMMENT</strong> &lsquo;配送员名字&rsquo;,  <code>order_state</code> tinyint(4) <strong>NOT</strong> NULL <strong>DEFAULT</strong> &lsquo;0&rsquo; <strong>COMMENT</strong> &lsquo;配送状态&rsquo;,  <code>is_deleted</code> tinyint(4) <strong>NOT</strong> NULL <strong>DEFAULT</strong> &lsquo;0&rsquo;,  <code>grabbed_time</code> <strong>timestamp</strong> <strong>NOT</strong> NULL <strong>DEFAULT</strong> <strong>CURRENT_TIMESTAMP</strong> <strong>COMMENT</strong> &lsquo;抢单时间&rsquo;,  <code>merchant_customer_distance</code> decimal(10,2) <strong>NOT</strong> NULL <strong>DEFAULT</strong> &lsquo;0.00&rsquo; <strong>COMMENT</strong> &lsquo;商铺到顾客步行距离&rsquo;,  <code>created_at</code> datetime <strong>NOT</strong> NULL <strong>DEFAULT</strong> <strong>CURRENT_TIMESTAMP</strong>,  <code>updated_at</code> datetime <strong>NOT</strong> NULL <strong>DEFAULT</strong> <strong>CURRENT_TIMESTAMP</strong> <strong>ON</strong> <strong>UPDATE</strong> <strong>CURRENT_TIMESTAMP</strong>,  PRIMARY <strong>KEY</strong> (<code>id</code>),  <strong>UNIQUE</strong> <strong>KEY</strong> <code>uk_order_id</code> (<code>order_id</code>),  <strong>KEY</strong> <code>ix_created_at</code> (<code>created_at</code>),  <strong>KEY</strong> <code>ix_updated_at</code> (<code>updated_at</code>) ) <strong>ENGINE</strong>=<strong>InnoDB</strong> AUTO_INCREMENT=14 <strong>DEFAULT</strong> <strong>CHARSET</strong>=utf8 <strong>COMMENT</strong>='配送单&rsquo;;</p>
+<p><strong>看到末尾几行的<strong><strong>PRIMARY KEY</strong></strong>、<strong><strong>UNIQUE KEY</strong></strong>和<strong><strong>KEY</strong></strong>了吗，它们就对应于<strong><strong>DESC tb_order</strong></strong>结果中的<strong><strong>PRI</strong></strong>、<strong><strong>UNI</strong></strong>和<strong><strong>MUL</strong></strong>，分别标识主键索引、唯一索引和普通索引。每一行括号内的字段就表示对应的索引列。</strong></p>
+<p><strong>JOIN语法家族</strong></p>
+<p><img src="http://note.youdao.com/noteshare?id=7937f78c749461fd6e520b08cc9b5478&amp;sub=0586F41C94124A92B7B935E7FB10D660" alt="img"></p>
+<p><strong>CREATE</strong> <strong>TABLE</strong> <code>tb_grab_order_limit</code> (  <code>id</code> BIGINT(20) <strong>NOT</strong> NULL AUTO_INCREMENT <strong>COMMENT</strong> &lsquo;自增主键&rsquo;,  <code>rider_id</code> BIGINT(20) <strong>NOT</strong> NULL <strong>DEFAULT</strong> 0  <strong>COMMENT</strong> &lsquo;骑手id&rsquo;,  <code>order_grab_limit</code> INT(11) <strong>NOT</strong> NULL <strong>DEFAULT</strong> &lsquo;0&rsquo; <strong>COMMENT</strong> &lsquo;接单上限&rsquo;,  <code>is_deleted</code> TINYINT <strong>NOT</strong> NULL <strong>DEFAULT</strong> 0 <strong>COMMENT</strong> &lsquo;该记录是否被删除&rsquo;,  <code>created_at</code> DATETIME <strong>NOT</strong> NULL <strong>DEFAULT</strong> <strong>CURRENT_TIMESTAMP</strong> <strong>COMMENT</strong> &lsquo;创建时间&rsquo;,  <code>updated_at</code> DATETIME <strong>NOT</strong> NULL <strong>DEFAULT</strong> <strong>CURRENT_TIMESTAMP</strong> <strong>ON</strong> <strong>UPDATE</strong> <strong>CURRENT_TIMESTAMP</strong> <strong>COMMENT</strong> &lsquo;更新时间&rsquo;,  PRIMARY <strong>KEY</strong>(<code>id</code>),  <strong>KEY</strong> <code>ix_rider_id</code> (<code>rider_id</code>),  <strong>KEY</strong> <code>ix_created_at</code> (<code>created_at</code>),  <strong>KEY</strong> <code>ix_updated_at</code> (<code>updated_at</code>) ) <strong>ENGINE</strong> = <strong>InnoDB</strong> <strong>DEFAULT</strong> <strong>CHARSET</strong>=utf8 <strong>comment</strong>=&quot;自定义骑手接单上限表&rdquo;;</p>
+<p><strong>[1] 从LEFT JOIN开始</strong></p>
+<p>以这两张表为基础，设想一个场景：假设要查询tb_rider表中所有骑手对应的自定义接单上限。我们的Sql应该怎么写呢？</p>
+<p>**思路1：**先查出tb_rider表中所有骑手id，再根据这些骑手id作为查询条件，通过前面学习过的IN语法从tb_grab_order_limit表中查询出所对应的自定义接单上限的记录。</p>
+<p><strong>SELECT</strong> <strong>id</strong> <strong>FROM</strong> tb_rider;</p>
+<p>和</p>
+<p><strong>SELECT</strong> rider_id, order_grab_limit <strong>FROM</strong> tb_grab_order_limit <strong>WHERE</strong> rider_id <strong>IN</strong> (1, 2, 3, 4, 5, 6, 7, 8);</p>
+<p>思路1显然是个Bad idea。但是思路1诠释了解决这个查询问题的基本要点。</p>
+<ol>
+<li>我们最终想要的数据是需要结合tb_rider和tb_grab_order_limit两张表共同得出的；</li>
+<li>关联这两张数据表的条件是骑手id；</li>
+<li>因为查询的要求是：tb_rider表中<strong>所有</strong>骑手，因此应该以tb_rider表中的骑手id作为查询参考集合；</li>
+<li>不是所有tb_rider表中的骑手都配置了自定义接单上限，思路1的查询方案存在一个缺点，就是我们需要根据查询结果，在逻辑上做一个转换得知哪些骑手没有配置自定义接单上限( 不在返回结果中的骑手)；</li>
+</ol>
+<p>**思路2：**基于这几个要点我们可以使用LEFT JOIN语法，下面是对应的Sql语句。</p>
+<p><strong>SELECT</strong> tb_rider.id, tb_grab_order_limit.order_grab_limit <strong>FROM</strong> tb_rider <strong>LEFT</strong> <strong>JOIN</strong> tb_grab_order_limit <strong>ON</strong> tb_rider.id = tb_grab_order_limit.rider_id;</p>
+<p>这里先介绍一下JOIN语法的基本结构：表1 (INNER/LEFT/RIGHT/FULL) JOIN 表2 ON 表1.列1 = 表2.列2。<strong>JOIN关键字前后连接的是两张需要关联查询的数据表，ON关键字后面跟着关联的条件。一共有四种类型的JOIN，他们分别是INNER JOIN、LEFT JOIN、RIGHT JOIN和FULL JOIN</strong>。以例子中的LEFT JOIN为例，表1 LEFT JOIN 表2 ON 表1.列1 = 表2.列2的含义是，遍历表1中的列1的值，如果表2中列2的值有和它相等的则展示对应的记录，如果没有表2.列2和表1.列1相等，则展示为null。</p>
+<p>思路2的例子中，tb_rider LEFT JOIN tb_grab_order_limit ON tb_rider.id = tb_grab_order_limit.rider_id的含义是，遍历tb_rider表中id这一列(tb_rider表的id字段业务含义就是骑手id)的值，寻找tb_grab_order_limit表中rider_id列的值和它相等的记录，如果不存在则是null。</p>
+<p>我们还看到SELECT语句的内容和我们之前使用的很类似，但又稍微有点不一样，都是<strong>表名.列名</strong>的书写形式。其实这主要是指明了字段所属的表，因为JOIN的两张数据表中可能存在的相同名称的列，例如tb_rider表和tb_grab_order_limit表都有id字段，但含义截然不同，这样写更加明确。</p>
+<p><strong>[2] LEFT JOIN的姊妹篇：RIGHT JOIN</strong></p>
+<p>前面我们知道LEFT JOIN是以连接的左侧表作为查询的结果集的依据，RIGHT JOIN则是以连接的右侧表作为依据。让我们考虑另一个场景：假设想要查询所有设置了自定义接单上限的骑手姓名。应该如何写这个Sql呢？</p>
+<p>先在聪明的大脑里思考几分钟。此时你需要类比LEFT JOIN，需要理解上一段内容讲述的LEFT JOIN知识点，可能需要回到上一段再看一看示例Sql语句以及对应的结果。没关系，一开始学习的时候慢慢来。</p>
+<p>答案是这样的。</p>
+<p><strong>SELECT</strong> tb_grab_order_limit.rider_id, tb_rider.name <strong>FROM</strong> tb_rider <strong>RIGHT</strong> <strong>JOIN</strong> tb_grab_order_limit <strong>ON</strong> tb_rider.id = tb_grab_order_limit.rider_id;</p>
+<p>**RIGHT JOIN是以连接的右侧表为依据，**而tb_grab_order_limit中的骑手id=(1, 2, 4, 6, 10)，其中骑手id为10的骑手在tb_rider表中是没有的，所以name为null。</p>
+<p><strong>[3] 一丝不苟的INNER JOIN</strong></p>
+<p>之所以叫“一丝不苟”的INNER JOIN，是因为INNER JOIN是非常严格的关联查询，换句话说，必须是根据JOIN条件两张表中存在匹配记录的才作为结果集返回。</p>
+<p><strong>SELECT</strong> tb_rider.id, tb_grab_order_limit.order_grab_limit <strong>FROM</strong> tb_rider <strong>INNER</strong> <strong>JOIN</strong> tb_grab_order_limit <strong>ON</strong> tb_rider.id = tb_grab_order_limit.rider_id;</p>
+<p>这是因为INNER JOIN会遍历连接一侧的表，根据ON后的连接条件，和连接另一侧的表进行比较，只有两张表中存在匹配的记录才会作为结果集返回。例如这里，它会遍历tb_rider表中id字段的值，并且去tb_grab_order_limit表中寻找rider_id与之匹配的记录，如果找到则作为结果返回。</p>
+<p><strong>[4] 心大的FULL JOIN</strong></p>
+<p>FULL JOIN其实并不在乎匹配与否，而是将连接的两张表中所有的行都返回，如果有匹配的则返回匹配的结果，如果没有匹配则哪张表中缺失则对应的将当前这条记录标记为null。</p>
+<p><strong>[5]交集UNION</strong></p>
+<ol>
+<li>UNION连接两条SELECT语句，作用是将两个SELECT语句的查询结果取交集；</li>
+<li>第2条SELECT语句中的WHERE tb_rider.id IS null 是为了对存在匹配的数据记录去重(否则UNION之后会有重复的结果)；</li>
+<li>WHERE语句是在RIGHT JOIN之后，UNION之前执行的；</li>
+</ol>
+<p><strong>SELECT</strong> tb_rider.id, tb_rider.name, tb_grab_order_limit.rider_id, tb_grab_order_limit.order_grab_limit <strong>FROM</strong> tb_rider <strong>LEFT</strong> <strong>JOIN</strong> tb_grab_order_limit <strong>ON</strong> tb_rider.id = tb_grab_order_limit.rider_id <strong>UNION</strong> <strong>SELECT</strong> tb_rider.id, tb_rider.name, tb_grab_order_limit.rider_id, tb_grab_order_limit.rider_id <strong>FROM</strong> tb_rider <strong>RIGHT</strong> <strong>JOIN</strong> tb_grab_order_limit <strong>ON</strong> tb_rider.id = tb_grab_order_limit.rider_id <strong>WHERE</strong> tb_rider.id <strong>IS</strong> null;</p>
+<p>从上面的讲解我们了解到JOIN的四种用法，总结一下。</p>
+<ol>
+<li>INNER JOIN关键字在两张表中都有匹配的值的时候返回匹配的行；</li>
+<li>LEFT JOIN关键字从左表返回所有的行，即使在右表中没有匹配的行；</li>
+<li>RIGHT JOIN关键字从右表返回所有的行，即使在左表中没有匹配的行；</li>
+<li>FULL JOIN关键字从左表和右表那里返回所有行，即使右表的行在左表中没有匹配或者左表的行在右表中没有匹配，这些行也会返回。</li>
+</ol>
+<p><strong>嵌套的SELECT语法</strong></p>
+<p>再来看一下讲述LEFT JOIN的开始，我们提到的那个例子：查询tb_rider表中所有骑手对应的自定义接单上限。当时我们首先提出了思路1，是分为2个步骤的。</p>
+<p><strong>SELECT</strong> <strong>id</strong> <strong>FROM</strong> tb_rider;</p>
+<p>和</p>
+<p><strong>SELECT</strong> rider_id, order_grab_limit <strong>FROM</strong> tb_grab_order_limit <strong>WHERE</strong> rider_id <strong>IN</strong> (1, 2, 3, 4, 5, 6, 7, 8);</p>
+<p>我们说这个思路不好，这是显然的，因为在现实场景中往往数据集合都很大(例如这里的rider_id在现实中可能是成百上千甚至成千上万个)，思路本身没有问题但无法操作执行。所以在4.3节我们选择通过JOIN语法来实现同样的查询。那是不是思路1就真的只能是个纸上谈兵的思路了呢？当然不是啦！我们还可以使用嵌套的SELECT语句，就像这样。</p>
+<p><strong>SELECT</strong> rider_id, order_grab_limit <strong>FROM</strong> tb_grab_order_limit <strong>WHERE</strong> rider_id <strong>IN</strong> (<strong>SELECT</strong> <strong>id</strong> <strong>FROM</strong> tb_rider);</p>
+<p>这个写法非常好理解，WHERE rider_id IN (SELECT id FROM tb_rider)首先执行括号中的语句SELECT id FROM tb_rider，然后执行IN筛选，就是我们的思路1描述的那样。于是得到下面的结果。</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
