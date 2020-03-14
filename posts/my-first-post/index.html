@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>mysql复习 // 阿康的笔记</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.67.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="阿康" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://1998kang.github.io/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="mysql复习"/>
+<meta name="twitter:description" content="闯关答题：快速复习
+前面的几个段落我们学习了Sql查询中最常用，而且特别好用的语法知识，让我们简单总结一下。
+ 数据库、数据表的概念； 最基本的Sql查询结构； IN查询和逻辑操作语法(AND/OR)； 对查询结果进行排序和LIMIT语法； 聚合函数(COUNT/AVG/SUM)和DISTINCT语法； 对查询结果分组(GROUP BY)； 对聚合函数的结果进行筛选的HAVING语法； 字段类型和索引的概念和作用； JOIN语法的一家子(LEFT JOIN/RIGHT JOIN/INNER JOIN/FULL JOIN)； 嵌套的SELECT语法；  学习了这么多知识点，实在是太腻害了！给自己点赞！
+但是(凡事都有个但是)&hellip;
+想要把这些知识点融会贯通，灵活应用到现实工作中更多变、更复杂的查询场景，仅仅是“学会”是不够的，还需要更多的“练习”和“回味”。
+这个部分我设计了一个“闯关答题”项目，通过思考和回答这些闯关题，帮助你更好的掌握上面提到的知识点。
+先来看一下答题将要用到的数据表。
+[1] 商品数据表：tb_product
+   id product_id name price     1 1001 iPad Pro 10.5 64G WLAN 4888   2 1002 Macbook Pro 2017 13.3 i5/8G/256GB 13888   3 1003 iPhone X 64G 8388    建表语句：
+CREATE TABLE tb_product ( id bigint(20) NOT NULL AUTO_INCREMENT COMMENT &lsquo;自增主键&rsquo;, product_id bigint(20) NOT NULL DEFAULT &lsquo;0&rsquo; COMMENT &lsquo;商品id&rsquo;, name varchar(100) NOT NULL DEFAULT &#39;&rsquo; COMMENT &lsquo;商品名称&rsquo;, price int(11) NOT NULL DEFAULT &lsquo;0&rsquo; COMMENT &lsquo;商品价格&rsquo;, PRIMARY KEY (id), UNIQUE KEY uk_product_id (product_id) ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT=&#39;商品信息表&rsquo;;"/>
+
+    <meta property="og:title" content="mysql复习" />
+<meta property="og:description" content="闯关答题：快速复习
+前面的几个段落我们学习了Sql查询中最常用，而且特别好用的语法知识，让我们简单总结一下。
+ 数据库、数据表的概念； 最基本的Sql查询结构； IN查询和逻辑操作语法(AND/OR)； 对查询结果进行排序和LIMIT语法； 聚合函数(COUNT/AVG/SUM)和DISTINCT语法； 对查询结果分组(GROUP BY)； 对聚合函数的结果进行筛选的HAVING语法； 字段类型和索引的概念和作用； JOIN语法的一家子(LEFT JOIN/RIGHT JOIN/INNER JOIN/FULL JOIN)； 嵌套的SELECT语法；  学习了这么多知识点，实在是太腻害了！给自己点赞！
+但是(凡事都有个但是)&hellip;
+想要把这些知识点融会贯通，灵活应用到现实工作中更多变、更复杂的查询场景，仅仅是“学会”是不够的，还需要更多的“练习”和“回味”。
+这个部分我设计了一个“闯关答题”项目，通过思考和回答这些闯关题，帮助你更好的掌握上面提到的知识点。
+先来看一下答题将要用到的数据表。
+[1] 商品数据表：tb_product
+   id product_id name price     1 1001 iPad Pro 10.5 64G WLAN 4888   2 1002 Macbook Pro 2017 13.3 i5/8G/256GB 13888   3 1003 iPhone X 64G 8388    建表语句：
+CREATE TABLE tb_product ( id bigint(20) NOT NULL AUTO_INCREMENT COMMENT &lsquo;自增主键&rsquo;, product_id bigint(20) NOT NULL DEFAULT &lsquo;0&rsquo; COMMENT &lsquo;商品id&rsquo;, name varchar(100) NOT NULL DEFAULT &#39;&rsquo; COMMENT &lsquo;商品名称&rsquo;, price int(11) NOT NULL DEFAULT &lsquo;0&rsquo; COMMENT &lsquo;商品价格&rsquo;, PRIMARY KEY (id), UNIQUE KEY uk_product_id (product_id) ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT=&#39;商品信息表&rsquo;;" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://1998kang.github.io/posts/my-first-post/" />
+<meta property="article:published_time" content="2020-03-14T13:12:05+08:00" />
+<meta property="article:modified_time" content="2020-03-14T13:12:05+08:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://1998kang.github.io/"><img class="app-header-avatar" src="/avatar.jpg" alt="阿康" /></a>
+      <h1>阿康的笔记</h1>
+      <p>阿康在这里祝各位身体健康，万事如意</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://github.com/1998kang" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">mysql复习</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Mar 14, 2020
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          4 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      <p><strong>闯关答题：快速复习</strong></p>
+<p>前面的几个段落我们学习了Sql查询中最常用，而且特别好用的语法知识，让我们简单总结一下。</p>
+<ol>
+<li>数据库、数据表的概念；</li>
+<li>最基本的Sql查询结构；</li>
+<li>IN查询和逻辑操作语法(AND/OR)；</li>
+<li>对查询结果进行排序和LIMIT语法；</li>
+<li>聚合函数(COUNT/AVG/SUM)和DISTINCT语法；</li>
+<li>对查询结果分组(GROUP BY)；</li>
+<li>对聚合函数的结果进行筛选的HAVING语法；</li>
+<li>字段类型和索引的概念和作用；</li>
+<li>JOIN语法的一家子(LEFT JOIN/RIGHT JOIN/INNER JOIN/FULL JOIN)；</li>
+<li>嵌套的SELECT语法；</li>
+</ol>
+<p>学习了这么多知识点，实在是太腻害了！给自己点赞！</p>
+<p>但是(凡事都有个但是)&hellip;</p>
+<p>想要把这些知识点融会贯通，灵活应用到现实工作中更多变、更复杂的查询场景，仅仅是“学会”是不够的，还需要更多的“练习”和“回味”。</p>
+<p>这个部分我设计了一个“闯关答题”项目，通过思考和回答这些闯关题，帮助你更好的掌握上面提到的知识点。</p>
+<p>先来看一下答题将要用到的数据表。</p>
+<p>[1] 商品数据表：tb_product</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>product_id</th>
+<th>name</th>
+<th>price</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1001</td>
+<td>iPad Pro 10.5 64G WLAN</td>
+<td>4888</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1002</td>
+<td>Macbook Pro 2017 13.3 i5/8G/256GB</td>
+<td>13888</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1003</td>
+<td>iPhone X 64G</td>
+<td>8388</td>
+</tr>
+</tbody>
+</table>
+<p>建表语句：</p>
+<p><strong>CREATE</strong> <strong>TABLE</strong> <code>tb_product</code> (  <code>id</code> bigint(20) <strong>NOT</strong> NULL AUTO_INCREMENT <strong>COMMENT</strong> &lsquo;自增主键&rsquo;,  <code>product_id</code> bigint(20) <strong>NOT</strong> NULL <strong>DEFAULT</strong> &lsquo;0&rsquo; <strong>COMMENT</strong> &lsquo;商品id&rsquo;,  <code>name</code> varchar(100) <strong>NOT</strong> NULL <strong>DEFAULT</strong> '&rsquo; <strong>COMMENT</strong> &lsquo;商品名称&rsquo;,  <code>price</code> int(11) <strong>NOT</strong> NULL <strong>DEFAULT</strong> &lsquo;0&rsquo; <strong>COMMENT</strong> &lsquo;商品价格&rsquo;,  PRIMARY <strong>KEY</strong> (<code>id</code>),  <strong>UNIQUE</strong> <strong>KEY</strong> <code>uk_product_id</code> (<code>product_id</code>) ) <strong>ENGINE</strong>=<strong>InnoDB</strong> AUTO_INCREMENT=14 <strong>DEFAULT</strong> <strong>CHARSET</strong>=utf8 <strong>COMMENT</strong>='商品信息表&rsquo;;</p>
+<p>字段含义：</p>
+<ol>
+<li>id：自增主键；</li>
+<li>product_id：商品id；</li>
+<li>name：商品名称；</li>
+<li>price：商品单价，单位是元；</li>
+</ol>
+<p>[2] 用户数据表：tb_customer</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>customer_id</th>
+<th>name</th>
+<th>gender</th>
+<th>balance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>NO100001</td>
+<td>火火</td>
+<td>女</td>
+<td>18888</td>
+</tr>
+<tr>
+<td>2</td>
+<td>NO100002</td>
+<td>拨泼抹</td>
+<td>女</td>
+<td>9000</td>
+</tr>
+<tr>
+<td>3</td>
+<td>NO100003</td>
+<td>艾桥</td>
+<td>男</td>
+<td>7990</td>
+</tr>
+<tr>
+<td>4</td>
+<td>NO100004</td>
+<td>水娃</td>
+<td>女</td>
+<td>8388</td>
+</tr>
+</tbody>
+</table>
+<p>建表语句：</p>
+<p><strong>CREATE</strong> <strong>TABLE</strong> <code>tb_customer</code> (  <code>id</code> bigint(20) <strong>NOT</strong> NULL AUTO_INCREMENT <strong>COMMENT</strong> &lsquo;自增主键&rsquo;,  <code>customer_id</code> varchar(100) <strong>NOT</strong> NULL <strong>DEFAULT</strong> '&rsquo; <strong>COMMENT</strong> &lsquo;用户id&rsquo;,  <code>name</code> varchar(100) <strong>NOT</strong> NULL <strong>DEFAULT</strong> '&rsquo; <strong>COMMENT</strong> &lsquo;用户姓名&rsquo;,  <code>gender</code> varchar(30) <strong>NOT</strong> NULL <strong>DEFAULT</strong> '&rsquo; <strong>COMMENT</strong> &lsquo;用户性别&rsquo;,  <code>balance</code> int(11) <strong>NOT</strong> NULL <strong>DEFAULT</strong> &lsquo;0&rsquo; <strong>COMMENT</strong> &lsquo;账户余额&rsquo;,  PRIMARY <strong>KEY</strong> (<code>id</code>),  <strong>UNIQUE</strong> <strong>KEY</strong> <code>uk_customer_id</code> (<code>customer_id</code>) ) <strong>ENGINE</strong>=<strong>InnoDB</strong> AUTO_INCREMENT=14 <strong>DEFAULT</strong> <strong>CHARSET</strong>=utf8 <strong>COMMENT</strong>='用户信息表&rsquo;;</p>
+<p>字段含义：</p>
+<ol>
+<li>id：自增主键；</li>
+<li>customer_id：用户id；</li>
+<li>name：用户姓名；</li>
+<li>gender：用户的性别；</li>
+<li>balance：用户当前的可用账户余额，单位是元；</li>
+</ol>
+<p>[3] 订单数据表：tb_order</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>order_id</th>
+<th>customer_id</th>
+<th>product_id</th>
+<th>quantity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>NUM1000301</td>
+<td>NO100001</td>
+<td>1001</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>NUM1000302</td>
+<td>NO100001</td>
+<td>1002</td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>NUM1000303</td>
+<td>NO100002</td>
+<td>1002</td>
+<td>2</td>
+</tr>
+<tr>
+<td>4</td>
+<td>NUM1000304</td>
+<td>NO100003</td>
+<td>1002</td>
+<td>1</td>
+</tr>
+<tr>
+<td>5</td>
+<td>NUM1000305</td>
+<td>NO100001</td>
+<td>1003</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>建表语句：</p>
+<p><strong>CREATE</strong> <strong>TABLE</strong> <code>tb_order</code> (  <code>id</code> bigint(20) <strong>NOT</strong> NULL AUTO_INCREMENT <strong>COMMENT</strong> &lsquo;自增主键&rsquo;,  <code>order_id</code> varchar(100) <strong>NOT</strong> NULL <strong>DEFAULT</strong> '&rsquo; <strong>COMMENT</strong> &lsquo;订单id&rsquo;,  <code>customer_id</code> varchar(100) <strong>NOT</strong> NULL <strong>DEFAULT</strong> &lsquo;0&rsquo; <strong>COMMENT</strong> &lsquo;用户id&rsquo;,  <code>product_id</code> bigint(20) <strong>NOT</strong> NULL <strong>DEFAULT</strong> &lsquo;0&rsquo; <strong>COMMENT</strong> &lsquo;商品id&rsquo;,  <code>quantity</code> int(11) <strong>NOT</strong> NULL <strong>DEFAULT</strong> &lsquo;0&rsquo; <strong>COMMENT</strong> &lsquo;商品价格&rsquo;,  PRIMARY <strong>KEY</strong> (<code>id</code>),  <strong>UNIQUE</strong> <strong>KEY</strong> <code>uk_order_id</code> (<code>order_id</code>) ) <strong>ENGINE</strong>=<strong>InnoDB</strong> AUTO_INCREMENT=14 <strong>DEFAULT</strong> <strong>CHARSET</strong>=utf8 <strong>COMMENT</strong>='订单数据表&rsquo;;</p>
+<p>字段含义：</p>
+<ol>
+<li>id：自增主键；</li>
+<li>order_id：订单号；</li>
+<li>customer_id：下单用户id；</li>
+<li>product_id：购买的商品id；</li>
+<li>quantity：购买的数量；</li>
+</ol>
+<p>了解完需要用到表结构，我们就要开始答题啦！</p>
+<p><strong>第一关</strong>：查询账户余额大于1万元的用户id和姓名？</p>
+<p>Answer:</p>
+<p><strong>SELECT</strong> customer_id, <strong>name</strong> <strong>FROM</strong> tb_customer <strong>WHERE</strong> balance &gt; 10000;</p>
+<table>
+<thead>
+<tr>
+<th>customer_id</th>
+<th>name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NO100001</td>
+<td>火火</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第二关</strong>：查询账户余额小于1万元且性别为女生的用户姓名？</p>
+<p>Answer:</p>
+<p><strong>SELECT</strong> <strong>name</strong> <strong>FROM</strong> tb_customer <strong>WHERE</strong> balance &lt; 10000 <strong>AND</strong> gender=&quot;女&rdquo;;</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>拨泼抹</td>
+</tr>
+<tr>
+<td>水娃</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第三关</strong>：查询用户id为NO100001和NO100002的用户，所有购买记录的订单号？</p>
+<p>Hint：IN</p>
+<p>Answer:</p>
+<p><strong>SELECT</strong> order_id <strong>FROM</strong> tb_order <strong>WHERE</strong> customer_id <strong>IN</strong> (&ldquo;NO100001&rdquo;, &ldquo;NO100002&rdquo;);</p>
+<table>
+<thead>
+<tr>
+<th>order_id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NUM1000301</td>
+</tr>
+<tr>
+<td>NUM1000302</td>
+</tr>
+<tr>
+<td>NUM1000303</td>
+</tr>
+<tr>
+<td>NUM1000305</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第四关</strong>：查询用户id为NO100001、NO100002两位用户所有的购买记录(所有字段)，要求按照优先以商品id递增、其次以订单号递减的规则展示数据？</p>
+<p>Hint：IN、ORDER BY</p>
+<p>Answer:</p>
+<p><strong>SELECT</strong> * <strong>FROM</strong> tb_order <strong>WHERE</strong> customer_id <strong>IN</strong> (&ldquo;NO100001&rdquo;, &ldquo;NO100002&rdquo;) <strong>ORDER</strong> <strong>BY</strong> product_id <strong>ASC</strong>, order_id <strong>DESC</strong>;</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>order_id</th>
+<th>customer_id</th>
+<th>product_id</th>
+<th>quantity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>NUM1000301</td>
+<td>NO100001</td>
+<td>1001</td>
+<td>1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>NUM1000303</td>
+<td>NO100002</td>
+<td>1002</td>
+<td>2</td>
+</tr>
+<tr>
+<td>2</td>
+<td>NUM1000302</td>
+<td>NO100001</td>
+<td>1002</td>
+<td>2</td>
+</tr>
+<tr>
+<td>5</td>
+<td>NUM1000305</td>
+<td>NO100001</td>
+<td>1003</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第五关</strong>：查询性别为女生的用户总数？</p>
+<p>Hint：COUNT</p>
+<p>Answer:</p>
+<p><strong>SELECT</strong> <strong>COUNT</strong>(customer_id) <strong>FROM</strong> tb_customer <strong>WHERE</strong> gender=&quot;女&rdquo;;</p>
+<table>
+<thead>
+<tr>
+<th>COUNT(customer_id)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第六关</strong>：查询NO100001、NO100002、NO100003三位用户各自购买商品的总数(不区分商品类型)，输出购买商品件数大于等于2件的用户id以及他们对应购买的商品总数？</p>
+<p>Warning：“购买商品的总数”和上一关“女生用户的总数”，这两个**“总数”**一样吗？</p>
+<p>Hint：IN、SUM、HAVING</p>
+<p>Answer:</p>
+<p><strong>SELECT</strong> customer_id, <strong>SUM</strong>(quantity) <strong>FROM</strong> tb_order <strong>WHERE</strong> customer_id <strong>IN</strong> (&ldquo;NO100001&rdquo;, &ldquo;NO100002&rdquo;, &ldquo;NO100003&rdquo;) <strong>GROUP</strong> <strong>BY</strong> customer_id <strong>HAVING</strong> <strong>SUM</strong>(quantity) &gt;= 2;</p>
+<table>
+<thead>
+<tr>
+<th>customer_id</th>
+<th>SUM(quantity)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NO100001</td>
+<td>4</td>
+</tr>
+<tr>
+<td>NO100002</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第七关</strong>：查询NO100001、NO100002、NO100003三位用户各自购买商品的总数(不区分商品类型)，输出购买总数前两名的用户id以及他们对应购买的商品总数？</p>
+<p>Hint：IN、SUM、ORDER BY、LIMIT</p>
+<p>Answer:</p>
+<p><strong>SELECT</strong> customer_id, <strong>SUM</strong>(quantity) <strong>FROM</strong> tb_order <strong>WHERE</strong> customer_id <strong>IN</strong> (&ldquo;NO100001&rdquo;, &ldquo;NO100002&rdquo;, &ldquo;NO100003&rdquo;) <strong>GROUP</strong> <strong>BY</strong> customer_id <strong>ORDER</strong> <strong>BY</strong> <strong>SUM</strong>(quantity) <strong>DESC</strong> <strong>LIMIT</strong> 2;</p>
+<table>
+<thead>
+<tr>
+<th>customer_id</th>
+<th>SUM(quantity)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NO100001</td>
+<td>4</td>
+</tr>
+<tr>
+<td>NO100002</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第八关</strong>：查询所有用户各自购买商品的总数(不区分商品类型)，输出购买商品件数大于等于2件的用户id以及他们对应购买的商品总数？要求给出至少两种写法。</p>
+<p>Warning：注意是“所有用户”，不是所有的用户都购买了商品</p>
+<p>Hint：关联查询有哪些方法？</p>
+<p>Answer:</p>
+<p><strong>写法一：嵌套的SELECT</strong></p>
+<p><strong>SELECT</strong> customer_id, <strong>SUM</strong>(quantity) <strong>FROM</strong> tb_order <strong>WHERE</strong> customer_id <strong>IN</strong> (<strong>SELECT</strong> customer_id <strong>FROM</strong> tb_customer) <strong>GROUP</strong> <strong>BY</strong> customer_id <strong>HAVING</strong> <strong>SUM</strong>(quantity) &gt;= 2;</p>
+<table>
+<thead>
+<tr>
+<th>customer_id</th>
+<th>SUM(quantity)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NO100001</td>
+<td>4</td>
+</tr>
+<tr>
+<td>NO100002</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>写法二：使用LEFT JOIN语法</strong></p>
+<p><strong>SELECT</strong> tb_customer.customer_id, <strong>SUM</strong>(tb_order.quantity) <strong>FROM</strong> tb_customer <strong>LEFT</strong> <strong>JOIN</strong> tb_order <strong>ON</strong> tb_customer.customer_id = tb_order.customer_id <strong>GROUP</strong> <strong>BY</strong> tb_customer.customer_id <strong>HAVING</strong> <strong>SUM</strong>(tb_order.quantity) &gt;= 2;</p>
+<table>
+<thead>
+<tr>
+<th>customer_id</th>
+<th>SUM(tb_order.quantity)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NO100001</td>
+<td>4</td>
+</tr>
+<tr>
+<td>NO100002</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第九关</strong>：查询所有用户各自购买商品的总数(不区分商品类型)，输出购买总数前两名的用户id以及他们对应购买的商品总数？要求给出至少两种写法。</p>
+<p>Hint：关联查询有哪些方法？</p>
+<p>Answer:</p>
+<p>写法一：嵌套的SELECT</p>
+<p><strong>SELECT</strong> customer_id, <strong>SUM</strong>(quantity) <strong>FROM</strong> tb_order <strong>WHERE</strong> customer_id <strong>IN</strong> (<strong>SELECT</strong> customer_id <strong>FROM</strong> tb_customer) <strong>GROUP</strong> <strong>BY</strong> customer_id <strong>ORDER</strong> <strong>BY</strong> <strong>SUM</strong>(quantity) <strong>DESC</strong> <strong>LIMIT</strong> 2;</p>
+<table>
+<thead>
+<tr>
+<th>customer_id</th>
+<th>SUM(quantity)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NO100001</td>
+<td>4</td>
+</tr>
+<tr>
+<td>NO100002</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>写法二：使用LEFT JOIN语法</p>
+<p><strong>SELECT</strong> tb_customer.customer_id, <strong>SUM</strong>(tb_order.quantity) <strong>FROM</strong> tb_customer <strong>LEFT</strong> <strong>JOIN</strong> tb_order <strong>ON</strong> tb_customer.customer_id = tb_order.customer_id <strong>GROUP</strong> <strong>BY</strong> tb_customer.customer_id <strong>ORDER</strong> <strong>BY</strong> <strong>SUM</strong>(tb_order.quantity) <strong>DESC</strong> <strong>LIMIT</strong> 2;</p>
+<table>
+<thead>
+<tr>
+<th>customer_id</th>
+<th>SUM(tb_order.quantity)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NO100001</td>
+<td>4</td>
+</tr>
+<tr>
+<td>NO100002</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第十关</strong>：以下哪几条Sql语句使用到了索引？分别是哪些字段上的索引？是什么类型的索引？</p>
+<p>\1. <strong>SELECT</strong> <strong>name</strong> <strong>FROM</strong> tb_customer <strong>WHERE</strong> customer_id = 1001; 2. <strong>SELECT</strong> product_id, <strong>name</strong> <strong>FROM</strong> tb_product <strong>WHERE</strong> price &gt; 5000; 3. <strong>SELECT</strong> order_id, customer_id, product_id <strong>FROM</strong> tb_order   <strong>WHERE</strong> order_id = &ldquo;NUM1000302&rdquo; <strong>AND</strong> customer_id = &ldquo;NO100001&rdquo;   <strong>AND</strong> product_id = &ldquo;1002&rdquo;; 4. <strong>SELECT</strong> order_id <strong>FROM</strong> tb_order <strong>WHERE</strong> <strong>id</strong> &gt; 2;</p>
+<p>Hint：索引</p>
+<p>Answer:</p>
+<table>
+<thead>
+<tr>
+<th>sql序号</th>
+<th>是否使用到索引</th>
+<th>索引所在字段</th>
+<th>索引类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>是</td>
+<td>customer_id</td>
+<td>UNIQUE KEY</td>
+</tr>
+<tr>
+<td>2</td>
+<td>否</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>3</td>
+<td>是</td>
+<td>order_id</td>
+<td>UNIQUE KEY</td>
+</tr>
+<tr>
+<td>4</td>
+<td>是</td>
+<td>id</td>
+<td>PRIMARY KEY</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

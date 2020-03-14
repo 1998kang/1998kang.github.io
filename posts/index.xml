@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on 阿康的笔记</title>
+    <link>https://1998kang.github.io/posts/</link>
+    <description>Recent content in Posts on 阿康的笔记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 14 Mar 2020 13:12:05 +0800</lastBuildDate>
+    
+	<atom:link href="https://1998kang.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>mysql复习</title>
+      <link>https://1998kang.github.io/posts/my-first-post/</link>
+      <pubDate>Sat, 14 Mar 2020 13:12:05 +0800</pubDate>
+      
+      <guid>https://1998kang.github.io/posts/my-first-post/</guid>
+      <description>闯关答题：快速复习
+前面的几个段落我们学习了Sql查询中最常用，而且特别好用的语法知识，让我们简单总结一下。
+ 数据库、数据表的概念； 最基本的Sql查询结构； IN查询和逻辑操作语法(AND/OR)； 对查询结果进行排序和LIMIT语法； 聚合函数(COUNT/AVG/SUM)和DISTINCT语法； 对查询结果分组(GROUP BY)； 对聚合函数的结果进行筛选的HAVING语法； 字段类型和索引的概念和作用； JOIN语法的一家子(LEFT JOIN/RIGHT JOIN/INNER JOIN/FULL JOIN)； 嵌套的SELECT语法；  学习了这么多知识点，实在是太腻害了！给自己点赞！
+但是(凡事都有个但是)&amp;hellip;
+想要把这些知识点融会贯通，灵活应用到现实工作中更多变、更复杂的查询场景，仅仅是“学会”是不够的，还需要更多的“练习”和“回味”。
+这个部分我设计了一个“闯关答题”项目，通过思考和回答这些闯关题，帮助你更好的掌握上面提到的知识点。
+先来看一下答题将要用到的数据表。
+[1] 商品数据表：tb_product
+   id product_id name price     1 1001 iPad Pro 10.5 64G WLAN 4888   2 1002 Macbook Pro 2017 13.3 i5/8G/256GB 13888   3 1003 iPhone X 64G 8388    建表语句：
+CREATE TABLE tb_product ( id bigint(20) NOT NULL AUTO_INCREMENT COMMENT &amp;lsquo;自增主键&amp;rsquo;, product_id bigint(20) NOT NULL DEFAULT &amp;lsquo;0&amp;rsquo; COMMENT &amp;lsquo;商品id&amp;rsquo;, name varchar(100) NOT NULL DEFAULT &#39;&amp;rsquo; COMMENT &amp;lsquo;商品名称&amp;rsquo;, price int(11) NOT NULL DEFAULT &amp;lsquo;0&amp;rsquo; COMMENT &amp;lsquo;商品价格&amp;rsquo;, PRIMARY KEY (id), UNIQUE KEY uk_product_id (product_id) ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT=&#39;商品信息表&amp;rsquo;;</description>
+    </item>
+    
+    <item>
+      <title>Test 9</title>
+      <link>https://1998kang.github.io/posts/test-9/</link>
+      <pubDate>Thu, 09 Jan 1012 00:00:00 +0000</pubDate>
+      
+      <guid>https://1998kang.github.io/posts/test-9/</guid>
+      <description>Test 9</description>
+    </item>
+    
+    <item>
+      <title>Test 8</title>
+      <link>https://1998kang.github.io/posts/test-8/</link>
+      <pubDate>Wed, 08 Jan 1012 00:00:00 +0000</pubDate>
+      
+      <guid>https://1998kang.github.io/posts/test-8/</guid>
+      <description>Test 8</description>
+    </item>
+    
+    <item>
+      <title>Test 7</title>
+      <link>https://1998kang.github.io/posts/test-7/</link>
+      <pubDate>Tue, 07 Jan 1012 00:00:00 +0000</pubDate>
+      
+      <guid>https://1998kang.github.io/posts/test-7/</guid>
+      <description>Test 7</description>
+    </item>
+    
+    <item>
+      <title>Test 6</title>
+      <link>https://1998kang.github.io/posts/test-6/</link>
+      <pubDate>Mon, 06 Jan 1012 00:00:00 +0000</pubDate>
+      
+      <guid>https://1998kang.github.io/posts/test-6/</guid>
+      <description>Test 6</description>
+    </item>
+    
+    <item>
+      <title>Test 5</title>
+      <link>https://1998kang.github.io/posts/test-5/</link>
+      <pubDate>Sun, 05 Jan 1012 00:00:00 +0000</pubDate>
+      
+      <guid>https://1998kang.github.io/posts/test-5/</guid>
+      <description>Test 5</description>
+    </item>
+    
+    <item>
+      <title>Test 4</title>
+      <link>https://1998kang.github.io/posts/test-4/</link>
+      <pubDate>Sat, 04 Jan 1012 00:00:00 +0000</pubDate>
+      
+      <guid>https://1998kang.github.io/posts/test-4/</guid>
+      <description>Test 4</description>
+    </item>
+    
+    <item>
+      <title>Test 3</title>
+      <link>https://1998kang.github.io/posts/test-3/</link>
+      <pubDate>Fri, 03 Jan 1012 00:00:00 +0000</pubDate>
+      
+      <guid>https://1998kang.github.io/posts/test-3/</guid>
+      <description>Test 3</description>
+    </item>
+    
+    <item>
+      <title>Test 2</title>
+      <link>https://1998kang.github.io/posts/test-2/</link>
+      <pubDate>Thu, 02 Jan 1012 00:00:00 +0000</pubDate>
+      
+      <guid>https://1998kang.github.io/posts/test-2/</guid>
+      <description>Test 2</description>
+    </item>
+    
+    <item>
+      <title>Test 1</title>
+      <link>https://1998kang.github.io/posts/test-1/</link>
+      <pubDate>Wed, 01 Jan 1012 00:00:00 +0000</pubDate>
+      
+      <guid>https://1998kang.github.io/posts/test-1/</guid>
+      <description>Test 1 I am referencing a footnote1
+  I am the footnote &amp;#x21a9;&amp;#xfe0e;
+   </description>
+    </item>
+    
+  </channel>
+</rss>
