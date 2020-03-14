@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en-us">
   <head>
-    <title>Mysql // 阿康的笔记</title>
+    <title>mysql查询 // 阿康的笔记</title>
     <meta charset="utf-8" />
     <meta name="generator" content="Hugo 0.67.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -11,7 +11,7 @@
 
     
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Mysql"/>
+<meta name="twitter:title" content="mysql查询"/>
 <meta name="twitter:description" content="自增主键。一个听起来很吓人的名字，但实际含义很简单。“自增”的意思是，每次在这张数据表中创建一条新记录的时候，数据库都会在上一个id值的基础上自动加上一个固定的步长(默认就是&#43;1)作为新记录的id值。而所谓“主键”，就是能够在一张数据表中唯一标识一条记录的字段，因为每条记录的id都不一样，所以它是主键。这个字段可以是为了单纯的标识数据的唯一性，也可以具有一些业务含义，比如这里的id就同时也是骑手的账号id；
 基本查询
 SELECT 列名(或者*，表示所有列) **FROM** 表名 **WHERE** 筛选条件;
@@ -23,7 +23,7 @@ SELECT * FROM tb_rider WHERE created_at &gt;= &ldquo;2017-02-01 00:00:00&rdquo; 
 排序：ORDER BY
 SELECT order_id, created_at FROM tb_order WHERE rider_id = 1 AND grabbed_time &gt;= &ldquo;2017-12-30 00:00:00&rdquo; AND grabbed_time &lt; &ldquo;2017-12-31 00:00:00&rdquo; AND order_state = 40 ORDER BY created_at DESC;"/>
 
-    <meta property="og:title" content="Mysql" />
+    <meta property="og:title" content="mysql查询" />
 <meta property="og:description" content="自增主键。一个听起来很吓人的名字，但实际含义很简单。“自增”的意思是，每次在这张数据表中创建一条新记录的时候，数据库都会在上一个id值的基础上自动加上一个固定的步长(默认就是&#43;1)作为新记录的id值。而所谓“主键”，就是能够在一张数据表中唯一标识一条记录的字段，因为每条记录的id都不一样，所以它是主键。这个字段可以是为了单纯的标识数据的唯一性，也可以具有一些业务含义，比如这里的id就同时也是骑手的账号id；
 基本查询
 SELECT 列名(或者*，表示所有列) **FROM** 表名 **WHERE** 筛选条件;
@@ -59,7 +59,7 @@ SELECT order_id, created_at FROM tb_order WHERE rider_id = 1 AND grabbed_time &g
       
   <article class="post">
     <header class="post-header">
-      <h1 class ="post-title">Mysql</h1>
+      <h1 class ="post-title">mysql查询</h1>
       <div class="post-meta">
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
