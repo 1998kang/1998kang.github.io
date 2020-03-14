@@ -12,14 +12,60 @@
     
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="java基础"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:description" content="final：
+final可以修饰：属性，方法，类，局部变量（方法中的变量）
+final修饰的属性的初始化可以在编译期，也可以在运行期，初始化后不能被改变。
+final修饰的属性跟具体对象有关，在运行期初始化的final属性，不同对象可以有不同的值。
+final修饰的属性表明是一个常数（创建后不能被修改）。
+final修饰的方法表示该方法在子类中不能被重写，final修饰的类表示该类不能被继承。
+对于基本类型数据，final会将值变为一个常数（创建后不能被修改）；但是对于对象句柄（亦可称作引用或者指针），final会将句柄变为一个常数（进行声明时，必须将句柄初始化到一个具体的对象。而且不能再将句柄指向另一个对象。但是，对象的本身是可以修改的。这一限制也适用于数组，数组也属于对象，数组本身也是可以修改的。方法参数中的final句柄，意味着在该方法内部，我们不能改变参数句柄指向的实际东西，也就是说在方法内部不能给形参句柄再另外赋值）。
+static：
+static可以修饰：属性，方法，代码段，内部类（静态内部类或嵌套内部类）
+static修饰的属性的初始化在编译期（类加载的时候），初始化后能改变。
+static修饰的属性所有对象都只有一个值。
+static修饰的属性强调它们只有一个。
+static修饰的属性、方法、代码段跟该类的具体对象无关，不创建对象也能调用static修饰的属性、方法等（不用new对象就可以使用）
+static和“this、super”势不两立，static跟具体对象无关，而this、super正好跟具体对象有关。
+static final：
+static修饰的属性强调它们只有一个，final修饰的属性表明是一个常数（创建后不能被修改）。static final修饰的属性表示一旦给值，就不可修改，并且可以通过类名访问。
+static final也可以修饰方法，表示该方法不能重写，可以在不new对象的情况下调用
+局部变量：在方法、构造方法或者语句块中定义的变量被称为局部变量。变量声明和初始化都是在方法中，方法结束后，变量就会自动销毁。
+成员变量：成员变量是定义在类中，方法体之外的变量。这种变量在创建对象的时候实例化。成员变量可以被类中方法、构造方法和特定类的语句块访问。
+类变量：类变量也声明在类中，方法体之外，但必须声明为static类型。
+匿名对象：不指定对象句柄，直接调用对象方法，new.Person().showinfo();
+只可以进行一次方法调用，或者当作实参传递给一个方法调用。
+方法重载：
+在同一个类中，允许存在一个以上的同名方法，只要参数个数或者参数类型不同即可。只看参数。"/>
 
     <meta property="og:title" content="java基础" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="final：
+final可以修饰：属性，方法，类，局部变量（方法中的变量）
+final修饰的属性的初始化可以在编译期，也可以在运行期，初始化后不能被改变。
+final修饰的属性跟具体对象有关，在运行期初始化的final属性，不同对象可以有不同的值。
+final修饰的属性表明是一个常数（创建后不能被修改）。
+final修饰的方法表示该方法在子类中不能被重写，final修饰的类表示该类不能被继承。
+对于基本类型数据，final会将值变为一个常数（创建后不能被修改）；但是对于对象句柄（亦可称作引用或者指针），final会将句柄变为一个常数（进行声明时，必须将句柄初始化到一个具体的对象。而且不能再将句柄指向另一个对象。但是，对象的本身是可以修改的。这一限制也适用于数组，数组也属于对象，数组本身也是可以修改的。方法参数中的final句柄，意味着在该方法内部，我们不能改变参数句柄指向的实际东西，也就是说在方法内部不能给形参句柄再另外赋值）。
+static：
+static可以修饰：属性，方法，代码段，内部类（静态内部类或嵌套内部类）
+static修饰的属性的初始化在编译期（类加载的时候），初始化后能改变。
+static修饰的属性所有对象都只有一个值。
+static修饰的属性强调它们只有一个。
+static修饰的属性、方法、代码段跟该类的具体对象无关，不创建对象也能调用static修饰的属性、方法等（不用new对象就可以使用）
+static和“this、super”势不两立，static跟具体对象无关，而this、super正好跟具体对象有关。
+static final：
+static修饰的属性强调它们只有一个，final修饰的属性表明是一个常数（创建后不能被修改）。static final修饰的属性表示一旦给值，就不可修改，并且可以通过类名访问。
+static final也可以修饰方法，表示该方法不能重写，可以在不new对象的情况下调用
+局部变量：在方法、构造方法或者语句块中定义的变量被称为局部变量。变量声明和初始化都是在方法中，方法结束后，变量就会自动销毁。
+成员变量：成员变量是定义在类中，方法体之外的变量。这种变量在创建对象的时候实例化。成员变量可以被类中方法、构造方法和特定类的语句块访问。
+类变量：类变量也声明在类中，方法体之外，但必须声明为static类型。
+匿名对象：不指定对象句柄，直接调用对象方法，new.Person().showinfo();
+只可以进行一次方法调用，或者当作实参传递给一个方法调用。
+方法重载：
+在同一个类中，允许存在一个以上的同名方法，只要参数个数或者参数类型不同即可。只看参数。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://1998kang.github.io/posts/javabase/" />
-<meta property="article:published_time" content="2020-03-14T20:25:45+08:00" />
-<meta property="article:modified_time" content="2020-03-14T20:25:45+08:00" />
+<meta property="article:published_time" content="2020-03-14T22:25:45+08:00" />
+<meta property="article:modified_time" content="2020-03-14T22:25:45+08:00" />
 
 
   </head>
@@ -55,13 +101,35 @@
   <title>clock</title>
   <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
 </svg>
-          0 min read
+          1 min read
         </div></div>
     </header>
     <div class="post-content">
-      <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">
+      <p><strong>final：</strong></p>
+<p>final可以修饰：属性，方法，类，局部变量（方法中的变量）</p>
+<p><strong>final修饰的属性的初始化可以在编译期，也可以在运行期，初始化后不能被改变。</strong></p>
+<p>final修饰的属性跟具体对象有关，在运行期初始化的final属性，不同对象可以有不同的值。</p>
+<p><strong>final修饰的属性表明是一个常数（创建后不能被修改）。</strong></p>
+<p><strong>final修饰的方法表示该方法在子类中不能被重写，final修饰的类表示该类不能被继承。</strong></p>
+<p>对于基本类型数据，final会将值变为一个常数（创建后不能被修改）；但是对于对象句柄（亦可称作引用或者指针），final会将句柄变为一个常数（进行声明时，必须将句柄初始化到一个具体的对象。而且不能再将句柄指向另一个对象。但是，对象的本身是可以修改的。这一限制也适用于数组，数组也属于对象，数组本身也是可以修改的。方法参数中的final句柄，意味着在该方法内部，我们不能改变参数句柄指向的实际东西，也就是说在方法内部不能给形参句柄再另外赋值）。</p>
+<p><strong>static：</strong></p>
+<p>static可以修饰：属性，方法，代码段，内部类（静态内部类或嵌套内部类）</p>
+<p>static修饰的属性的初始化在编译期（类加载的时候），初始化后能改变。</p>
+<p>static修饰的属性所有对象都只有一个值。</p>
+<p>static修饰的属性强调它们只有一个。</p>
+<p>static修饰的属性、方法、代码段跟该类的具体对象无关，<strong>不创建对象也能调用static修饰的属性、方法等（不用new对象就可以使用）</strong></p>
+<p>static和“this、super”势不两立，static跟具体对象无关，而this、super正好跟具体对象有关。</p>
+<p><strong>static final：</strong></p>
+<p>static修饰的属性强调它们只有一个，final修饰的属性表明是一个常数（创建后不能被修改）。static final修饰的属性表示一旦给值，就不可修改，并且可以通过类名访问。</p>
+<p>static final也可以修饰方法，表示该方法不能重写，可以在不new对象的情况下调用</p>
+<p><strong>局部变量：在方法、构造方法或者语句块中定义的变量被称为局部变量。变量声明和初始化都是在方法中，方法结束后，变量就会自动销毁。</strong></p>
+<p><strong>成员变量：成员变量是定义在类中，方法体之外的变量。这种变量在创建对象的时候实例化。成员变量可以被类中方法、构造方法和特定类的语句块访问。</strong></p>
+<p><strong>类变量：类变量也声明在类中，方法体之外，但必须声明为static类型。</strong></p>
+<p><strong>匿名对象：不指定对象句柄，直接调用对象方法，new.Person().showinfo();</strong></p>
+<p><strong>只可以进行一次方法调用，或者当作实参传递给一个方法调用。</strong></p>
+<p><strong>方法重载：</strong></p>
+<p><strong>在同一个类中，允许存在一个以上的同名方法，只要参数个数或者参数类型不同即可。只看参数。</strong></p>
 
-</code></pre></div>
     </div>
     <div class="post-footer">
       
