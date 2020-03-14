@@ -6,10 +6,30 @@
     <description>Recent content on 阿康的笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 14 Mar 2020 14:21:03 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 14 Mar 2020 19:25:45 +0800</lastBuildDate>
     
 	<atom:link href="https://1998kang.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>常用springb-data-redis操作</title>
+      <link>https://1998kang.github.io/posts/redis/</link>
+      <pubDate>Sat, 14 Mar 2020 19:25:45 +0800</pubDate>
+      
+      <guid>https://1998kang.github.io/posts/redis/</guid>
+      <description>stringRedisTemplate.opsForValue().set(&amp;ldquo;test&amp;rdquo;, &amp;ldquo;100&amp;rdquo;,60*10,TimeUnit.SECONDS);//向redis里存入数据和设置缓存时间
+stringRedisTemplate.opsForValue().get(&amp;ldquo;test&amp;rdquo;)//根据key获取缓存中的val
+stringRedisTemplate.boundValueOps(&amp;ldquo;test&amp;rdquo;).increment(-1);//val做-1操作
+stringRedisTemplate.boundValueOps(&amp;ldquo;test&amp;rdquo;).increment(1);//val +1
+stringRedisTemplate.getExpire(&amp;ldquo;test&amp;rdquo;)//根据key获取过期时间
+stringRedisTemplate.getExpire(&amp;ldquo;test&amp;rdquo;,TimeUnit.SECONDS)//根据key获取过期时间并换算成指定单位
+stringRedisTemplate.delete(&amp;ldquo;test&amp;rdquo;);//根据key删除缓存
+stringRedisTemplate.hasKey(&amp;ldquo;546545&amp;rdquo;);//检查key是否存在，返回boolean值
+stringRedisTemplate.expire(&amp;ldquo;red_123&amp;rdquo;,1000 , TimeUnit.MILLISECONDS);//设置过期时间
+stringRedisTemplate.opsForSet().add(&amp;ldquo;red_123&amp;rdquo;, &amp;ldquo;1&amp;rdquo;,&amp;ldquo;2&amp;rdquo;,&amp;ldquo;3&amp;rdquo;);//向指定key中存放set集合
+stringRedisTemplate.opsForSet().isMember(&amp;ldquo;red_123&amp;rdquo;, &amp;ldquo;1&amp;rdquo;)//根据key查看集合中是否存在指定数据
+stringRedisTemplate.opsForSet().members(&amp;ldquo;red_123&amp;rdquo;);//根据key获取set集合</description>
+    </item>
     
     <item>
       <title>mysql查询</title>
